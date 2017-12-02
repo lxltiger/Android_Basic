@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:orientation="vertical"
+             tools:context="com.lxl.yuer.mydemo.UserDateDemo.ResultDateFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <Button
+        android:id="@+id/btn_get_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_date"/>
+    <Button
+        android:id="@+id/btn_get_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_time"/>
+
+    <Button
+        android:id="@+id/btn_get_date_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_date_time"/>
+
+</LinearLayout>

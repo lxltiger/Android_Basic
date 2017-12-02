@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="handler" type="com.lxl.foundation.HomeClickHandler"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".HomeActivity">
+        <Button
+            android:id="@+id/btn_back"
+            android:text="exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{handler::onClick}"/>
+        <Button
+            android:id="@+id/btn_date_demo"
+            android:text="Date Demo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:id="@+id/btn_data_bind"
+            android:text="Data Binding"
+            android:onClick="@{handler::onClick}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_collection"
+            android:text="Collection Binding"
+            android:onClick="@{handler::onClick}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_source"
+            android:text="Source Binding"
+            android:onClick="@{handler::onClick}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_observable"
+            android:text="Observable Binding"
+            android:onClick="@{(view)->handler.onClick(view)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_recycler"
+            android:text="RecyclerView Binding"
+            android:onClick="@{(view)->handler.onClick(view)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_conversion"
+            android:text="Conversion Binding"
+            android:onClick="@{(view)->handler.onClick(view)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:orientation="horizontal"
+    tools:context="com.lxl.yuer.advance.service.ServiceEntrance">
+
+    <Button
+        android:id="@+id/btn_start_service"
+        android:layout_width="wrap_content"
+        android:text="start service"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_stop_service"
+        android:layout_width="wrap_content"
+        android:text="stop service"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_intent_service"
+        android:layout_width="wrap_content"
+        android:text="intent service"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_intent_service2"
+        android:layout_width="wrap_content"
+        android:text="intent service redeliver"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_intent_service3"
+        android:layout_width="wrap_content"
+        android:text="intent service fail"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_intent_service4"
+        android:layout_width="wrap_content"
+        android:text="kill process"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_bind_service"
+        android:layout_width="wrap_content"
+        android:text="bind service"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="wrap_content"
+        android:text="call method in service"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_advance_service"
+        android:layout_width="wrap_content"
+        android:text="bind advance service"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_call_advance_method"
+        android:layout_width="wrap_content"
+        android:text="call advance method"
+        android:layout_height="wrap_content"/>
+
+
+</GridLayout>
