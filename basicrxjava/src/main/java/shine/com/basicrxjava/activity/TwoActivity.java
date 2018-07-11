@@ -11,7 +11,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import shine.com.basicrxjava.BeautyToPretty;
-import shine.com.basicrxjava.NetWork;
+import shine.com.basicrxjava.api.NetWork;
 import shine.com.basicrxjava.R;
 import shine.com.basicrxjava.entity.Pretty;
 
