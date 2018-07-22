@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wuhu.anhui.materialdesign_udacity.ForegroundImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/photo"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp"
+    android:foreground="@drawable/grey_ripple"
+    android:stateListAnimator="@animator/fab_raise"
+    android:transitionName="@string/transition_photo"/>
+

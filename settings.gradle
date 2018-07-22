@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':crimeintent', ':arch'
+include ':materialDesign', ':arch'

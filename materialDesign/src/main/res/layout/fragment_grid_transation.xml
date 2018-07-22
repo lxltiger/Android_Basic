@@ -1,0 +1,16 @@
+<GridView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gridView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:numColumns="2"
+    android:verticalSpacing="4dp"
+    android:horizontalSpacing="4dp"
+    android:padding="4dp"
+    android:clipToPadding="false"
+    tools:listitem="@layout/item_grid"
+    tools:context="wuhu.anhui.materialdesign_udacity.GridTransationFragment">
+
+
+</GridView>
