@@ -2,9 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/annotationProcessor" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/arch" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/basicrxjava" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/databinding" vcs="svn" />
   </component>
 </project>
