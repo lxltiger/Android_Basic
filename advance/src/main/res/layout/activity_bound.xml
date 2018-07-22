@@ -9,35 +9,23 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="wuhu.anhui.androidframework.MainActivity">
+    >
 
     <Button
-        android:id="@+id/btn_thread_handler"
+        android:id="@+id/btn_bind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ThreadHandlerActivity"/>
+        android:text="bind"/>
 
     <Button
-        android:id="@+id/btn_thread"
+        android:id="@+id/btn_unbind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SimpleThreadActivity"/>
+        android:text="unbind"/>
 
     <Button
-        android:id="@+id/btn_simple_service"
+        android:id="@+id/btn_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SimpleServiceActivity"/>
-
-    <Button
-        android:id="@+id/btn_bound_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SimpleBoundActivity"/>
-
-    <Button
-        android:id="@+id/btn_messenger_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MessengerActivity"/>
+        android:text="show number"/>
 </LinearLayout>
