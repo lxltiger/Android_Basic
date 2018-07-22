@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/arch" />
-            <option value="$PROJECT_DIR$/customView" />
+            <option value="$PROJECT_DIR$/crimeintent" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
