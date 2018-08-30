@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/arch" />
-            <option value="$PROJECT_DIR$/databinding" />
+            <option value="$PROJECT_DIR$/basicAndroid" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

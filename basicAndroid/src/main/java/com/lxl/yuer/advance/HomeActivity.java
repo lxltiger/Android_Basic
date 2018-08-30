@@ -4,30 +4,44 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.lxl.yuer.advance.date.DateDemoActivity;
 import com.lxl.yuer.advance.fragment.WaitingDialog;
 import com.lxl.yuer.advance.service.MessengerEntrance;
 import com.lxl.yuer.advance.service.RemoteEntrance;
 import com.lxl.yuer.advance.service.ServiceEntrance;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.AndroidInjection;
 
 
 /**
  * this app will display some useful knowledge I collect
  */
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = "HomeActivity";
 
+
+    @Inject
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+
+        if (gson != null) {
+            Log.d(TAG, "onCreate: not null for gson");
+        }
     }
 
     @Override
@@ -39,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void jump(Class T) {
+
         Intent intent = new Intent(this, T);
         startActivity(intent);
     }
