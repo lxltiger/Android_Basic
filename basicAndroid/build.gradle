@@ -60,15 +60,15 @@ dependencies {
     implementation deps.support.v4
     implementation deps.support.design
 
-    implementation 'io.reactivex:rxandroid:1.2.1'
-    implementation 'io.reactivex:rxjava:1.1.6'
-    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+//    implementation 'io.reactivex:rxandroid:1.2.1'
+//    implementation 'io.reactivex:rxjava:1.1.6'
+//    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
     implementation 'com.jakewharton:butterknife:7.0.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
-    implementation 'com.trello:rxlifecycle:0.5.0'
-    implementation 'com.trello:rxlifecycle-components:0.5.0'
+//    implementation 'com.trello:rxlifecycle:0.5.0'
+//    implementation 'com.trello:rxlifecycle-components:0.5.0'
 
     implementation deps.dagger.runtime
     implementation deps.dagger.android

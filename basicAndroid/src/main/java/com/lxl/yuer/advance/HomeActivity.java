@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.google.gson.Gson;
+import com.lxl.yuer.advance.dagger.ContextModule;
+import com.lxl.yuer.advance.dagger.DaggerRandomUserComponent;
+import com.lxl.yuer.advance.dagger.RandomUserApi;
+import com.lxl.yuer.advance.dagger.RandomUserComponent;
 import com.lxl.yuer.advance.date.DateDemoActivity;
 import com.lxl.yuer.advance.fragment.WaitingDialog;
 import com.lxl.yuer.advance.service.MessengerEntrance;
@@ -18,7 +21,6 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.AndroidInjection;
 
 
 /**
@@ -29,18 +31,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
     @Inject
-    Gson gson;
-
+    RandomUserApi randomUserService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
+//        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        RandomUserComponent userComponent = DaggerRandomUserComponent.builder().contextModule(new ContextModule(this)).build();
+        userComponent.inject(this);
 
-
-        if (gson != null) {
-            Log.d(TAG, "onCreate: not null for gson");
+        if (randomUserService != null) {
+            Log.d(TAG, "onCreate: not null for randomUserService");
         }
     }
 

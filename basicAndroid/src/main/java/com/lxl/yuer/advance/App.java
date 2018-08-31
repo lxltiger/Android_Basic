@@ -3,9 +3,6 @@ package com.lxl.yuer.advance;
 import android.app.Activity;
 import android.app.Application;
 
-import com.lxl.yuer.advance.dagger.DaggerNetComponent;
-import com.lxl.yuer.advance.dagger.HomeActivitySubComponent;
-
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -21,7 +18,7 @@ public class App extends Application implements HasActivityInjector {
     public void onCreate() {
         super.onCreate();
 
-        DaggerNetComponent.create().inject(this);
+//        DaggerNetComponent.create().inject(this);
     }
 
 

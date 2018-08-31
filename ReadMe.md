@@ -3,12 +3,14 @@ basicAndroid
 - 使用系统相机获取头像；日期和时间的选择和格式化、解析，
 - 选择日期和时间的控件不好使；以loader方式加载显示文件夹图片（权限问题失效），
 - 各种service的启动和互动。
+- Dagger2 Demo
 	
 advance  
 - 使用Messenager和aidl与app的service交互
 
 basicrxjava 
 - 关于RxJava和Retrofit的演示
+ 
 
 currency 
 - 来自并发实战的实例
