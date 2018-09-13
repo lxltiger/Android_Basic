@@ -51,7 +51,6 @@ dependencies {
     implementation deps.retrofit.gson
     implementation deps.okhttp_logging_interceptor
 
-//    implementation 'com.android.support:support-v4:27.1.1'
     annotationProcessor deps.room.compiler
     annotationProcessor deps.lifecycle.compiler
     testImplementation deps.junit

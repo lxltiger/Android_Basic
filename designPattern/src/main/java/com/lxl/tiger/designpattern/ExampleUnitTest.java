@@ -1,12 +1,38 @@
-package com.tiger.arch;
+package com.lxl.tiger.designpattern;
+
+import com.lxl.tiger.designpattern.adapter.Duck;
+import com.lxl.tiger.designpattern.adapter.FireTurkey;
+import com.lxl.tiger.designpattern.adapter.TurkeyAdapter;
+import com.lxl.tiger.designpattern.command.Command;
+import com.lxl.tiger.designpattern.command.GarageDoorDownCommand;
+import com.lxl.tiger.designpattern.command.GarageDoorUpCommand;
+import com.lxl.tiger.designpattern.command.GrabgeDoor;
+import com.lxl.tiger.designpattern.command.Light;
+import com.lxl.tiger.designpattern.command.LightOffCommand;
+import com.lxl.tiger.designpattern.command.LightOnCommand;
+import com.lxl.tiger.designpattern.command.MarcoCommand;
+import com.lxl.tiger.designpattern.command.RemoteControl;
+import com.lxl.tiger.designpattern.composite.Menu;
+import com.lxl.tiger.designpattern.composite.MenuComponent;
+import com.lxl.tiger.designpattern.composite.MenuItem;
+import com.lxl.tiger.designpattern.decorator.Beverage;
+import com.lxl.tiger.designpattern.decorator.DarkRoast;
+import com.lxl.tiger.designpattern.decorator.Espresso;
+import com.lxl.tiger.designpattern.decorator.Mocha;
+import com.lxl.tiger.designpattern.decorator.Whip;
+import com.lxl.tiger.designpattern.factory.ChicagoPisaStore;
+import com.lxl.tiger.designpattern.factory.NYPizzaStore;
+import com.lxl.tiger.designpattern.factory.PisaStore;
+import com.lxl.tiger.designpattern.state.GumballMachine;
+
+import java.util.Iterator;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {/*
-    @Test
+public class ExampleUnitTest {
     public void testPisa() {
         PisaStore chicagoPisaStore = new ChicagoPisaStore();
         PisaStore nyPizzaStore = new NYPizzaStore();
@@ -16,7 +42,6 @@ public class ExampleUnitTest {/*
 
     }
 
-    @Test
     public void testCoffee() {
         Beverage beverage = new Espresso();
         System.out.format("%s:$%S", beverage.getDescription(), beverage.cost());
@@ -28,7 +53,6 @@ public class ExampleUnitTest {/*
 
     }
 
-    @Test
     public void testCommand() {
         RemoteControl remoteControl = new RemoteControl();
         Light light = new Light();
@@ -54,7 +78,6 @@ public class ExampleUnitTest {/*
     }
 
 
-    @Test
     public void testAdapter() {
         Duck duck = new TurkeyAdapter(new FireTurkey());
         duck.swim();
@@ -98,14 +121,12 @@ public class ExampleUnitTest {/*
 
         return allMenus;
     }
-    @Test
     public void testComposite() {
         MenuComponent topMenu = populate();
         topMenu.print();
 
     }
 
-    @Test
     public void testIterator() {
 
         MenuComponent topMenu = populate();
@@ -117,7 +138,6 @@ public class ExampleUnitTest {/*
 
     }
 
-    @Test
     public void testState() {
         GumballMachine gumballMachine = new GumballMachine(5);
         System.out.println(gumballMachine);
@@ -135,5 +155,5 @@ public class ExampleUnitTest {/*
 
     }
 
-*/
+
 }
