@@ -1,7 +1,5 @@
 package com.lxl.tiger.designpattern.oberver;
 
-import android.util.Log;
-
 public class CurrentConditionsDisplay implements Observer ,DisplayElement{
 
     Subject subject;
@@ -13,7 +11,7 @@ public class CurrentConditionsDisplay implements Observer ,DisplayElement{
 
     @Override
     public void display() {
-        Log.d("CurrentConditionsDispla", data.toString());
+        System.out.println( data.toString());
     }
 
     @Override
