@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/annotationProcessor" vcs="svn" />
     <mapping directory="$PROJECT_DIR$/basicAndroid" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/basicrxjava" vcs="svn" />
     <mapping directory="$PROJECT_DIR$/databinding" vcs="svn" />
     <mapping directory="$PROJECT_DIR$/designPattern" vcs="svn" />
   </component>

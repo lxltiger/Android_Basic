@@ -1,139 +1,61 @@
 package com.tiger.arch;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {/*
+public class ExampleUnitTest {
     @Test
-    public void testPisa() {
-        PisaStore chicagoPisaStore = new ChicagoPisaStore();
-        PisaStore nyPizzaStore = new NYPizzaStore();
+    public void testCollection() {
+        List<Number> list = new ArrayList<>();
+        List<Integer> one = Arrays.asList(1, 3, 4);
+        List<Double> two = Arrays.asList(1.0, 3.0, 4.0);
+        //addAll的参数是Collection（? extends T）
+        // List<Integer>和List<Double>都是Collection（? extends Number）的子类型
+        list.addAll(one);
+        list.addAll(two);
 
-        chicagoPisaStore.orderPisa("cheese");
-        nyPizzaStore.orderPisa("cheese");
+        //List<Integer> is a subtype of List<? extends Number>),
+        List<? extends Number> numbers = one;
+        //numbers.add(3); 不能添加，因为不能确定元素类型
+        Number number = numbers.get(0);//只能获取
+        System.out.println(list.toString());
 
-    }
+        List<Object> objs = new ArrayList<>();
+        objs.add(1);
+        objs.add("two");
+        List<? super Integer> ints = objs;
+        ints.add(3);
 
-    @Test
-    public void testCoffee() {
-        Beverage beverage = new Espresso();
-        System.out.format("%s:$%S", beverage.getDescription(), beverage.cost());
-
-        Beverage beverage2 = new DarkRoast();
-        beverage2 = new Mocha(beverage2);
-        beverage2 = new Whip(beverage2);
-        System.out.format("%s:$%S", beverage2.getDescription(), beverage2.cost());
-
-    }
-
-    @Test
-    public void testCommand() {
-        RemoteControl remoteControl = new RemoteControl();
-        Light light = new Light();
-        LightOnCommand lightOnCommand = new LightOnCommand(light);
-        LightOffCommand lightOffCommand = new LightOffCommand(light);
-        remoteControl.setCommand(lightOnCommand, lightOffCommand, 0);
-        remoteControl.buttonOnPressed(0);
-
-
-        GrabgeDoor grabgeDoor = new GrabgeDoor();
-        GarageDoorUpCommand upCommand = new GarageDoorUpCommand(grabgeDoor);
-        GarageDoorDownCommand downCommand = new GarageDoorDownCommand(grabgeDoor);
-
-        Command[] on = {lightOnCommand, upCommand};
-        Command[] off = {lightOffCommand, downCommand};
-        MarcoCommand marcoOnCommand = new MarcoCommand(on);
-        MarcoCommand marcoOffCommand = new MarcoCommand(off);
-
-        remoteControl.setCommand(marcoOnCommand, marcoOffCommand, 1);
-
-        remoteControl.buttonOnPressed(1);
-        remoteControl.buttonOFFPressed(1);
     }
 
 
     @Test
-    public void testAdapter() {
-        Duck duck = new TurkeyAdapter(new FireTurkey());
-        duck.swim();
-        duck.fly();
-    }
+    public void testArray() {
+        Integer[] integers=new Integer[]{1,2,3};
+        //如果Integer是Number的子类型，那么Integer[]也是Number[]的子类型
+        Number[] numbers=integers;
+        numbers[2]=23.23f;//编译正常，运行错误
+        System.out.println(Arrays.toString(numbers));
 
-    private MenuComponent populate() {
-        //        总目录
-        MenuComponent allMenus = new Menu("ALL MENUS", "All menus combined");
-
-        MenuComponent pancakeHouseMenu =
-                new Menu("PANCAKE HOUSE MENU", "Breakfast");
-
-        MenuComponent dinerMenu =
-                new Menu("DINER MENU", "Lunch");
-        dinerMenu.add(new MenuItem(
-                "Pasta",
-                "Spaghetti with Marinara Sauce, and a slice of sourdough bread",
-                3.89));
-        //二级目录
-        MenuComponent dessertMenu =
-                new Menu("DESSERT MENU", "Dessert of course!");
-        dessertMenu.add(new MenuItem(
-                "Apple Pie",
-                "Apple pie with a flakey crust, topped with vanilla icecream",
-                1.59));
-        dessertMenu.add(new MenuItem(
-                "Orange Pie",
-                "Orange pie with a flakey crust, topped with vanilla icecream",
-                1.69));
-        // 甜点为晚餐的子目录
-        dinerMenu.add(dessertMenu);
-
-        MenuComponent cafeMenu =
-                new Menu("CAFE MENU", "Dinner");
-
-
-        allMenus.add(pancakeHouseMenu);
-        allMenus.add(dinerMenu);
-        allMenus.add(cafeMenu);
-
-        return allMenus;
-    }
-    @Test
-    public void testComposite() {
-        MenuComponent topMenu = populate();
-        topMenu.print();
-
-    }
-
-    @Test
-    public void testIterator() {
-
-        MenuComponent topMenu = populate();
-        Iterator<MenuComponent> iterator = topMenu.createIterator();
-        while (iterator.hasNext()) {
-            MenuComponent component = iterator.next();
-            System.out.println(component.getName()+"---"+component.getDescription());
-        }
-
-    }
-
-    @Test
-    public void testState() {
-        GumballMachine gumballMachine = new GumballMachine(5);
-        System.out.println(gumballMachine);
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        System.out.println(gumballMachine);
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        System.out.println(gumballMachine);
 
 
     }
-
-*/
+    static int numElementsInCommon(Set<?> s1, Set<?> s2) {
+        int result = 0;
+        for (Object o1 : s1)
+            if (s2.contains(o1))
+                result++;
+        return result;
+    }
 }

@@ -25,7 +25,10 @@ import com.lxl.tiger.designpattern.factory.NYPizzaStore;
 import com.lxl.tiger.designpattern.factory.PisaStore;
 import com.lxl.tiger.designpattern.state.GumballMachine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -151,6 +154,7 @@ public class ExampleUnitTest {
         gumballMachine.insertQuarter();
         gumballMachine.turnCrank();
         System.out.println(gumballMachine);
+
 
 
     }
