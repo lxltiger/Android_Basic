@@ -1,43 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="shine.com.advance">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="shine.com.advance">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".App"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainActivity" />
         <activity android:name=".SimpleThreadActivity" />
-        <activity android:name=".MessengerActivity" />
-        <activity android:name=".StartServiceActivity" />
+        <activity android:name=".messenger.MessengerActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".service.StartServiceActivity" />
         <activity android:name=".ThreadHandlerActivity" />
-        <activity android:name=".BoundActivity" />
+        <activity android:name=".service.LocalActivity" />
 
         <service
-            android:name=".service.RemoteService"
+            android:name=".aidl.RemoteService"
             android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.remote.service"/>
-            </intent-filter>
-        </service>
+            android:exported="true"
+            android:process=":remote"/>
         <service
-            android:name=".service.MessengerService"
+            android:name=".messenger.MessengerService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:process=":remote">
             <intent-filter>
-                <action android:name="shine.com.advance.IService"/>
+                <action android:name="shine.com.advance.IService" />
             </intent-filter>
         </service>
+
+        <activity android:name=".aidl.FactoryActivity">
+
+        </activity>
+
+        <service
+            android:name=".aidl.FactoryService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
+        <service android:name=".service.LocalService" />
+
+        <activity android:name=".aidl.RemoteActivity">
+
+        </activity>
     </application>
 
 </manifest>

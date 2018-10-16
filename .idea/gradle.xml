@@ -8,8 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/annotationProcessor" />
-            <option value="$PROJECT_DIR$/designPattern" />
+            <option value="$PROJECT_DIR$/advance" />
+            <option value="$PROJECT_DIR$/basicAndroid" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

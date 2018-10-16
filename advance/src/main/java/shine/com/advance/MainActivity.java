@@ -10,6 +10,10 @@ import android.view.View;
 import java.util.Map;
 import java.util.Set;
 
+import shine.com.advance.messenger.MessengerActivity;
+import shine.com.advance.service.LocalActivity;
+import shine.com.advance.service.StartServiceActivity;
+
 /*
 * 主线程由zygoteInit启动,经过一系列调用才执行到onCreate()
 * zygote为Activity创建的管理主线程的类为ActivityThread
@@ -142,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, StartServiceActivity.class));
                 break;
             case R.id.btn_bound_service:
-                startActivity(new Intent(this, BoundActivity.class));
+                startActivity(new Intent(this, LocalActivity.class));
                 break;
             case R.id.btn_messenger_service:
 

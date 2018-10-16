@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.lxl.yuer.advance">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,7 +16,8 @@
         android:label="@string/app_name"
         android:name=".App"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,16 +49,7 @@
         通过添加 android:exported 属性并将其设置为 "false"，确保服务仅适用于您的应用。
         这可以有效阻止其他应用启动您的服务，即便在使用显式 Intent 时也如此
         -->
-        <service
-            android:name=".service.AdvanceService"
-            android:enabled="true"
-            android:exported="false"></service>
-        <service
-            android:name=".service.ArgumentService"
-            android:exported="false"></service>
 
-        <activity android:name=".service.MessengerEntrance"></activity>
-        <activity android:name=".service.RemoteEntrance"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package shine.com.advance;
+package shine.com.advance.service;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,6 +15,8 @@ import android.os.Process;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+
+import shine.com.advance.R;
 
 /* 演示不同参数的service运行情况*/
 public class ArgumentService extends Service {

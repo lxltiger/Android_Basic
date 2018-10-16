@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android_Basic.iml" filepath="$PROJECT_DIR$/Android_Basic.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotationProcessor/basicJava.iml" filepath="$PROJECT_DIR$/.idea/modules/annotationProcessor/basicJava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/designPattern/designPattern.iml" filepath="$PROJECT_DIR$/designPattern/designPattern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/advance/advance.iml" filepath="$PROJECT_DIR$/advance/advance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basicAndroid/basicAndroid.iml" filepath="$PROJECT_DIR$/basicAndroid/basicAndroid.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package shine.com.advance;
+package shine.com.advance.service;
 
 import android.app.Service;
 import android.content.Intent;

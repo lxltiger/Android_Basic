@@ -5,7 +5,9 @@ basicAndroid
 - 各种service的启动和互动。
 - Dagger2 Demo
 	
-advance  
+advance
+- 使用aidl需要在build模块文件中设置资源目录
+- 非基本类型需要实现Parcelable，创建一个声明可打包类的 .aidl 文件，数据文件和aidl文件放在一个包下，make project （ctrl+F9）更新工程，这样就能使用自动生成的接口文件
 - 使用Messenager和aidl与app的service交互
 
 basicrxjava 

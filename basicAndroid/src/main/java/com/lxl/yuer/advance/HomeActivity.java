@@ -4,17 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
-import com.lxl.yuer.advance.dagger.DaggerRandomUserComponent;
 import com.lxl.yuer.advance.date.DateDemoActivity;
 import com.lxl.yuer.advance.fragment.WaitingDialog;
-import com.lxl.yuer.advance.service.MessengerEntrance;
-import com.lxl.yuer.advance.service.RemoteEntrance;
-import com.lxl.yuer.advance.service.ServiceEntrance;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -59,13 +52,10 @@ public class HomeActivity extends AppCompatActivity {
                 jump(DateDemoActivity.class);
                 break;
             case R.id.btn_service_demo:
-                jump(ServiceEntrance.class);
                 break;
             case R.id.btn_messenger_service_demo:
-                jump(MessengerEntrance.class);
                 break;
             case R.id.btn_remote_service_demo:
-                jump(RemoteEntrance.class);
                 break;
             case R.id.btn_data_bind:
                 showWatingDialog();

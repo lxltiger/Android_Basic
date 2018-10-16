@@ -1,4 +1,4 @@
-package shine.com.advance;
+package shine.com.advance.service;
 
 import android.app.Service;
 import android.content.ComponentName;
@@ -10,11 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import shine.com.advance.R;
+
 /*演示绑定服务的页面
 * 当通过绑定启动的服务没有绑定时会销毁*/
-public class BoundActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "BoundActivity";
-    private BoundService mBoundService;
+public class LocalActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "LocalActivity";
+    private LocalService mBoundService;
     private boolean isBound=false;
 
     @Override
@@ -30,7 +32,7 @@ public class BoundActivity extends AppCompatActivity implements View.OnClickList
     private ServiceConnection mServiceConnection=new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            BoundService.LocalBinder localBinder= (BoundService.LocalBinder) service;
+            LocalService.LocalBinder localBinder= (LocalService.LocalBinder) service;
             mBoundService=localBinder.getService();
             isBound=true;
         }
@@ -45,7 +47,7 @@ public class BoundActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bind:
-                Intent intent = new Intent(this, BoundService.class);
+                Intent intent = new Intent(this, LocalService.class);
                 bindService(intent, mServiceConnection, Service.BIND_AUTO_CREATE);
                 break;
             case R.id.btn_unbind:
