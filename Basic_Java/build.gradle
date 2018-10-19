@@ -9,6 +9,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:2.3.0"
 
 }
-
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
