@@ -43,6 +43,7 @@ public class AppleClient<T> {
         BiFunction<Integer, String, Apple> appleSupply = Apple::new;
         Apple grey = appleSupply.apply(12, "grey");
 
+
         //使用抽象方法构造函数式接口
         BiConsumer<List<Apple>, Apple> biConsumer = List::add;
         biConsumer.accept(list, grey);
@@ -84,8 +85,11 @@ public class AppleClient<T> {
                 result.add(item);
             }
         }
+
         return result;
     }
+
+
 
 
     private <I, T> List<T> map(List<I> weights, Function<I, T> function) {

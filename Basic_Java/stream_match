@@ -1,0 +1,202 @@
+本篇讲述match操作，省略中间流操作,有以下三种方式，方法名已经说明的其功能
+`````
+List<String> names= Arrays.asList("one", "two", "three", "four");
+boolean anyMatch = names.stream().anyMatch(s -> s.length()>2);
+boolean allMatch = names.stream().allMatch(s -> s.length()<10);
+boolean noneMatch = names.stream().noneMatch(s -> s.length()!=5);
+
+`````
+从源码看，调用的方法相同，只是参数不一样，下文会分析其意义
+ `````
+ ReferencePipeline.java
+  @Override
+     public final boolean anyMatch(Predicate<? super P_OUT> predicate) {
+         return evaluate(MatchOps.makeRef(predicate, MatchOps.MatchKind.ANY));
+     }
+
+     @Override
+     public final boolean allMatch(Predicate<? super P_OUT> predicate) {
+         return evaluate(MatchOps.makeRef(predicate, MatchOps.MatchKind.ALL));
+     }
+
+     @Override
+     public final boolean noneMatch(Predicate<? super P_OUT> predicate) {
+         return evaluate(MatchOps.makeRef(predicate, MatchOps.MatchKind.NONE));
+     }
+
+ `````
+终止操作构建的套路差不多
+`````
+MatchOps.java
+public static <T> TerminalOp<T, Boolean> makeRef(Predicate<? super T> predicate,
+            MatchKind matchKind) {
+        Objects.requireNonNull(predicate);
+        Objects.requireNonNull(matchKind);
+        //先忽略
+        class MatchSink extends BooleanTerminalSink<T> {
+            MatchSink() {
+                super(matchKind);
+            }
+
+            @Override
+            public void accept(T t) {
+                if (!stop && predicate.test(t) == matchKind.stopOnPredicateMatches) {
+                    stop = true;
+                    value = matchKind.shortCircuitResult;
+                }
+            }
+        }
+
+        return new MatchOp<>(StreamShape.REFERENCE, matchKind, MatchSink::new);
+    }
+
+`````
+这里使用构造函数的方法引用实例化Supplier<BooleanTerminalSink<T>>接口，sinkSupplier.get()的调用才会真正new对象。不熟悉可以参考[这篇]()。
+`````
+private static final class MatchOp<T> implements TerminalOp<T, Boolean> {
+        private final StreamShape inputShape;
+        final MatchKind matchKind;
+        final Supplier<BooleanTerminalSink<T>> sinkSupplier;
+               MatchOp(StreamShape shape,
+                MatchKind matchKind,
+                Supplier<BooleanTerminalSink<T>> sinkSupplier) {
+            this.inputShape = shape;
+            this.matchKind = matchKind;
+            this.sinkSupplier = sinkSupplier;
+        }
+
+        @Override
+        public int getOpFlags() {
+            注意操作标记是短路的，表示流元素可能发了一部分就被叫停了。后面会用到
+            return StreamOpFlag.IS_SHORT_CIRCUIT | StreamOpFlag.NOT_ORDERED;
+        }
+
+        ...
+
+        @Override
+        public <S> Boolean evaluateSequential(PipelineHelper<T> helper,
+                                              Spliterator<S> spliterator) {
+            return helper.wrapAndCopyInto(sinkSupplier.get(), spliterator).getAndClearState();
+        }
+
+       ...
+    }
+`````
+
+在wrapAndCopyInto之前，需要讲一下MatchKind，有三个枚举类型ANY、ALL、NONE，意义如下
+`````
+enum MatchKind {
+        /** 找一个符合条件的，短路返回true */
+        ANY(true, true),
+
+        /** 找到一个不合法条件的，短路返回false */
+        ALL(false, false),
+
+        /** 找到一个符合条件的，短路返回false */
+        NONE(true, false);
+        对判断结果的期望，any期望true，all期望false，none期望true，一旦期望成真即短路
+        private final boolean stopOnPredicateMatches;
+        发生短路返回的值
+        private final boolean shortCircuitResult;
+
+        private MatchKind(boolean stopOnPredicateMatches,boolean shortCircuitResult) {
+            this.stopOnPredicateMatches = stopOnPredicateMatches;
+            this.shortCircuitResult = shortCircuitResult;
+        }
+    }
+`````
+MatchSink使用MatchKind作为参数调用父类BooleanTerminalSink初始化返回值value，对短路结果取反
+`````
+private static abstract class BooleanTerminalSink<T> implements Sink<T> {
+        boolean stop;
+        boolean value;
+
+        BooleanTerminalSink(MatchKind matchKind) {
+            value = !matchKind.shortCircuitResult;
+        }
+
+        public boolean getAndClearState() {
+            return value;
+        }
+
+        @Override
+        public boolean cancellationRequested() {
+            return stop;
+        }
+    }
+`````
+和以前一样来到这里,不同的是这次标记是SHORT_CIRCUIT
+`````
+AbstractPipeline
+ @Override
+    final <P_IN> void copyInto(Sink<P_IN> wrappedSink, Spliterator<P_IN> spliterator) {
+        Objects.requireNonNull(wrappedSink);
+
+        if (!StreamOpFlag.SHORT_CIRCUIT.isKnown(getStreamAndOpFlags())) {
+            wrappedSink.begin(spliterator.getExactSizeIfKnown());
+            spliterator.forEachRemaining(wrappedSink);
+            wrappedSink.end();
+        }
+        else {
+            //有短路操作
+            copyIntoWithCancel(wrappedSink, spliterator);
+        }
+    }
+
+
+ final <P_IN> void copyIntoWithCancel(Sink<P_IN> wrappedSink, Spliterator<P_IN> spliterator) {
+        @SuppressWarnings({"rawtypes","unchecked"})
+        AbstractPipeline p = AbstractPipeline.this;
+        //回到源头
+        while (p.depth > 0) {
+            p = p.previousStage;
+        }
+        wrappedSink.begin(spliterator.getExactSizeIfKnown());
+        p.forEachWithCancel(spliterator, wrappedSink);
+        wrappedSink.end();
+    }
+`````
+这里和以前略有不同，我们不需要遍历整个数据源，只要下游达到目的就能提前收工。每发射一次都有问一下是否继续
+````
+ReferencePipeline
+@Override
+    final void forEachWithCancel(Spliterator<P_OUT> spliterator, Sink<P_OUT> sink) {
+        do { } while (!sink.cancellationRequested() && spliterator.tryAdvance(sink));
+    }
+````
+再看看MatchSink对元素的处理，这是整个功能的核心。
+`````
+@Override
+public void accept(T t) {
+    开始stop=false，判断结果是否符合期望，如前面所述
+    ANY-->期望predicate.test(t) 返回true
+    ALL-->期望predicate.test(t) 返回false
+    NONE-->期望predicate.test(t) 返回true
+
+    if (!stop && predicate.test(t) == matchKind.stopOnPredicateMatches) {
+        stop = true;
+        value = matchKind.shortCircuitResult;
+    }
+}
+
+`````
+一旦期望成功，stop=true，即请求取消；重新给value赋值，这是我们期望成功要返回的值。如果遍历到结束，那么value值就是之前的取反值
+`````
+private static abstract class BooleanTerminalSink<T> implements Sink<T> {
+        boolean stop;
+        boolean value;
+
+        BooleanTerminalSink(MatchKind matchKind) {
+            value = !matchKind.shortCircuitResult;
+        }
+
+        public boolean getAndClearState() {
+            return value;
+        }
+
+        @Override
+        public boolean cancellationRequested() {
+            return stop;
+        }
+    }
+`````

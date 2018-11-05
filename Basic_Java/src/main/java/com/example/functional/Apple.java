@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Apple  {
-    private final int weight;
+    private  int weight;
      private final String color;
 
      Apple(int weight, String color) {
@@ -16,6 +16,10 @@ public class Apple  {
 
     public static Apple of(int weight, String color) {
         return new Apple(weight,color);
+    }
+
+    public static Apple of(Apple apple) {
+        return new Apple(apple.weight+10,apple.color);
     }
 
 
@@ -34,6 +38,7 @@ public class Apple  {
         return apples;
     }
 
+
     public int getWeight() {
         return weight;
     }
@@ -42,15 +47,17 @@ public class Apple  {
         return color;
     }
 
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 
-
-    @Override
+    /*@Override
     public String toString() {
         return "Apple{" +
                 "weight=" + weight +
                 ", color='" + color + '\'' +
                 '}';
-    }
+    }*/
 
 
 
