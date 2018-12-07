@@ -1,3 +1,4 @@
+/*
 package com.example.annotation;
 
 import com.squareup.javapoet.AnnotationSpec;
@@ -119,11 +120,13 @@ public class ExcelParse {
 
     }
 
+*/
 /*
      * @param url
      * @param lastWord
      * @return 生成结果
-     * @POST("/user/SMSvalidate") Call<RequestBody> SMSvalidate(@Body RequestBody request);*/
+     * @POST("/user/SMSvalidate") Call<RequestBody> SMSvalidate(@Body RequestBody request);*//*
+
 
 
     private MethodSpec createMethodSpec(String url, String lastWord) {
@@ -223,3 +226,4 @@ public static class Login{
 
     }
 }
+*/

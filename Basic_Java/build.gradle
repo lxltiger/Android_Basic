@@ -5,7 +5,7 @@ dependencies {
     compile 'com.google.auto.service:auto-service:1.0-rc3'
     compile 'com.squareup:javawriter:2.5.1'
     compile 'com.squareup:javapoet:1.11.1'
-    compile group: 'org.apache.poi', name: 'poi', version: '3.17'
+//    compile group: 'org.apache.poi', name: 'poi', version: '3.17'
     compile "com.squareup.retrofit2:retrofit:2.3.0"
 
 }

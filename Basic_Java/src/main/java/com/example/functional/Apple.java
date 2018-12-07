@@ -1,5 +1,7 @@
 package com.example.functional;
 
+import com.example.PhoneNumber;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -8,7 +10,7 @@ public class Apple  {
     private  int weight;
      private final String color;
 
-     Apple(int weight, String color) {
+     public Apple(int weight, String color) {
         this.weight = weight;
         this.color = color;
     }
