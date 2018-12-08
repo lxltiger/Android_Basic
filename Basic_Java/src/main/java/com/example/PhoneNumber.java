@@ -2,17 +2,22 @@ package com.example;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.function.ToIntFunction;
+
+import static java.util.Comparator.comparingInt;
 
 /*
  *Java中的Object对象为所有对象的直接或间接父对象，里面定义的几个方法简单容易被忽略却非常重要。
  *关于Object中几个关键方法的解释和应用说明
  *以下来自Effective Java。
  * */
-public class PhoneNumber implements Cloneable {
+public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
 
-    private  final short linNum, prefix, areaCode;
+    private final short linNum, prefix, areaCode;
 
     public PhoneNumber(int number, int prefix, int areaCode) {
         this.linNum = rangeCheck(number, 999, "linNUm");
@@ -213,20 +218,20 @@ public class PhoneNumber implements Cloneable {
      * */
 
     @Override
-    public   PhoneNumber clone()  {
+    public PhoneNumber clone() {
         try {
-            return  (PhoneNumber) super.clone();
+            return (PhoneNumber) super.clone();
         } catch (CloneNotSupportedException e) {
             //实现Cloneable接口就不会跑出此异常
             throw new AssertionError();
         }
     }
+
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber(12, 23, 23);
 //        phoneNumber.testFloat();
-//        System.out.println(phoneNumber);
-
-
+//        phoneNumber.testOverFlow();
+        phoneNumber.testCompare();
     }
 
 
@@ -248,6 +253,60 @@ public class PhoneNumber implements Cloneable {
         System.out.println(f2.equals(f1));
 
     }
+
+    /*整型溢出*/
+    private void testOverFlow() {
+        int p1 = Integer.MAX_VALUE;
+        int p2 = -1;
+        System.out.printf("p1比p2大：%s", (p1 - p2) > 0);
+        p1 = Integer.MIN_VALUE;
+        p2 = 1;
+        System.out.printf("p1比p2大：%s", (p1 - p2) > 0);
+
+    }
+
+    private void testCompare() {
+        PhoneNumber phoneNumber = new PhoneNumber(1, 2, 3);
+        PhoneNumber phoneNumber2 = new PhoneNumber(2, 2, 3);
+        int i = phoneNumber.compareTo(phoneNumber2);
+        System.out.println(i);
+    }
+
+    /*
+     *
+     * 如果此方法返回0那么equals应该返回true，如果不是一定要说明不一致性
+     * HashSet依赖equals比较元素是否重复，TreeSet依赖compareTo给元素排序
+     * BigDecimal这两个方法就是不一致的，
+     * BigDecimal(1.0)and BigDecimal(1.00)equals返回false，因此加入HashSet是不相同的元素
+     * 但compareTo返回0，也就是大小相等，加入TreeSet就只有一个元素
+     *
+     * 注意：不要使用< >来比较大小，对浮点有例外，也不要使用减号，会有溢出
+     * 建议使用基本数据类型包装类的静态比较方法compare
+     * */
+    @Override
+    public int compareTo(PhoneNumber phoneNumber) {
+       /* int result = Short.compare(areaCode, phoneNumber.areaCode);
+        if (result == 0) {
+            result = Short.compare(prefix, phoneNumber.prefix);
+            if (result == 0) {
+                result = Short.compare(linNum, phoneNumber.linNum);
+            }
+        }
+        return result;*/
+        return COMPARATOR.compare(this, phoneNumber);
+    }
+
+    /*
+     * Comparator里面竟然有个equals抽象方法，实例化Comparator也不用复写，感觉没有必要
+     * 在Java8中，可以如下生成按某种顺序比较的复合比较器。内部实现是从最后一个比较方法进入向前调用的
+     * 优点：在lambda表达式的帮助下逻辑清晰，表达简便
+     * 缺点：效率比传统的低，每层比较都创建新对象
+     * 一般用static final 修饰，对象只创建一次
+     * */
+    private static final Comparator<PhoneNumber> COMPARATOR =
+            comparingInt((ToIntFunction<PhoneNumber>) phoneNumber -> phoneNumber.areaCode)
+                    .thenComparingInt(pn -> pn.prefix)
+                    .thenComparingInt(pn -> pn.linNum);
 
 
     // 使用组合方式，Adds a value component without violating the equals contract
