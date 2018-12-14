@@ -9,9 +9,6 @@ import android.view.View;
 import com.lxl.yuer.advance.date.DateDemoActivity;
 import com.lxl.yuer.advance.fragment.WaitingDialog;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 
 /**
  * this app will display some useful knowledge I collect
@@ -23,7 +20,6 @@ public class HomeActivity extends AppCompatActivity {
 //        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
 
     }
 
@@ -41,8 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @OnClick({R.id.btn_date_demo, R.id.btn_service_demo,R.id.btn_data_bind,
-            R.id.btn_back, R.id.btn_messenger_service_demo, R.id.btn_remote_service_demo})
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:

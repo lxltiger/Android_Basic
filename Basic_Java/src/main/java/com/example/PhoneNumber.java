@@ -11,9 +11,8 @@ import java.util.function.ToIntFunction;
 import static java.util.Comparator.comparingInt;
 
 /*
- *Java中的Object对象为所有对象的直接或间接父对象，里面定义的几个方法简单容易被忽略却非常重要。
- *关于Object中几个关键方法的解释和应用说明
- *以下来自Effective Java。
+ *Java中的Object对象为所有对象的直接或间接父对象，里面定义的几个方法容易被忽略却非常重要。
+ *以下来自Effective Java 对Object中几个关键方法的应用说明
  * */
 public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
 
@@ -93,8 +92,8 @@ public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
     }
 
 
-    /*
-     * Object中equals方法的实现仅仅是比较了两个对象的地址，对于某些类来说是实用的、毋需复写的
+   /*
+     * Object中equals方法的实现仅仅是比较了两个对象的地址，对于某些类来说正是所需用的、毋需复写的
      * 1.Thread,由于每个线程对象天生就是独一无二的，重点表达是实体而不是值，不需要比较
      * 2.java.util.regex.Pattern，正则表达式的类型也没有比较实例是否相同的必要
      * 3.父类复写了equals方法，并且是子类所需要的，如AbstractSet，AbstractList，AbstractMap，其子类毋需复写。
@@ -102,7 +101,7 @@ public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
 
      *什么时候需要对类的equals方法复写？
      *当一个类表示一个值，如String、Integer；它的不同实例需要逻辑上判断是否相同
-     *而不仅仅是地址是否相同，此时需要复写来自定义相等的条件。由于Map的键和Set的元素都是唯一的，如何判断元素相同是正确实用
+     *而不仅仅是地址是否相同，此时需要复写来自定义相等的条件。由于Map的键和Set的元素都是唯一的，如何判断元素相同是使用
      *此类集合的基础。
 
      *equals方法的复写需要满足以下通用约定
@@ -237,7 +236,7 @@ public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
 
     /*
      *为什么不使用＝＝比较浮点值
-     * 如果 f1 和 f2 都表示 Float.NaN，那么即使 Float.NaN==Float.NaN 的值为 false，equals 方法也将返回 true。
+     *如果 f1 和 f2 都表示 Float.NaN，那么即使 Float.NaN==Float.NaN 的值为 false，equals 方法也将返回 true。
      *如果 f1 表示 +0.0f，而 f2 表示 -0.0f，或相反，那么即使 0.0f==-0.0f 的值为 true，equal 测试也将返回 false。
      *
      */

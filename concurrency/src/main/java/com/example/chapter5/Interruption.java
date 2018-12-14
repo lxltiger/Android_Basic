@@ -1,6 +1,5 @@
 package com.example.chapter5;
 
-import com.sun.jmx.snmp.tasks.Task;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -20,16 +19,16 @@ import java.util.concurrent.BlockingQueue;
  */
 
 public class Interruption implements Runnable {
-    BlockingQueue<Task> mTasks;
+//    BlockingQueue<Task> mTasks;
     String[] importantMsgs=new String[100];
     @Override
     public void run() {
-        try {
+      /*  try {
             mTasks.take();
         } catch (InterruptedException e) {
             //恢复中断状态
             Thread.currentThread().interrupt();
-        }
+        }*/
     }
 
     /**
