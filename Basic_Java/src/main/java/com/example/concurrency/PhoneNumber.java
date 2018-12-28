@@ -1,8 +1,7 @@
-package com.example;
+package com.example.concurrency;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.Objects;
