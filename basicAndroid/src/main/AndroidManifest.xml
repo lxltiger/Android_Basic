@@ -35,16 +35,6 @@
             android:label="@string/title_activity_photo"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <service
-            android:name=".service.SimpleService"
-            android:enabled="true"
-            android:exported="false"></service>
-
-        <activity android:name=".service.ServiceEntrance"></activity>
-
-        <receiver
-            android:name=".service.ScreenReceiver"
-            android:enabled="true"></receiver>
         <!--
         通过添加 android:exported 属性并将其设置为 "false"，确保服务仅适用于您的应用。
         这可以有效阻止其他应用启动您的服务，即便在使用显式 Intent 时也如此

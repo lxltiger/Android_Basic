@@ -1,11 +1,17 @@
 package shine.com.advance;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 
 import java.util.Map;
 import java.util.Set;
@@ -15,46 +21,75 @@ import shine.com.advance.service.LocalActivity;
 import shine.com.advance.service.StartServiceActivity;
 
 /*
-* 主线程由zygoteInit启动,经过一系列调用才执行到onCreate()
-* zygote为Activity创建的管理主线程的类为ActivityThread
-* 包含Activity 的客户端至少有三个线程
-* Activity启动会创建ViewRoot.W,同时ActivityThread会创建ApplicationThread对象
-* 这两个对象都继承于Binder,所有需要启动两个线程,负责接受Linux Binder驱动发送的IPC调用
-*最后一个是应用所在的线程,即UI线程,用于处理用户信息及界面绘制操作
-*/
+ * 主线程由zygoteInit启动,经过一系列调用才执行到onCreate()
+ * zygote为Activity创建的管理主线程的类为ActivityThread
+ * 包含Activity 的客户端至少有三个线程
+ * Activity启动会创建ViewRoot.W,同时ActivityThread会创建ApplicationThread对象
+ * 这两个对象都继承于Binder,所有需要启动两个线程,负责接受Linux Binder驱动发送的IPC调用
+ *最后一个是应用所在的线程,即UI线程,用于处理用户信息及界面绘制操作
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //用来测试同一程序包中组件是否运行在相同进程中
-    public static int test_co_exist = -1;
+
     private static final String TAG = "MainActivity";
+    private WindowManager.LayoutParams layoutParams;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.btn_thread_handler).setOnClickListener(this);
-        findViewById(R.id.btn_thread).setOnClickListener(this);
         findViewById(R.id.btn_simple_service).setOnClickListener(this);
         findViewById(R.id.btn_bound_service).setOnClickListener(this);
         findViewById(R.id.btn_messenger_service).setOnClickListener(this);
-        //修改静态变量值,并在TestThreadActivity2调用,如果结果是2说明在同一进程
-        test_co_exist = 2;
-        //启动另一个页面,查看主线程和Binder线程变化
-//            Intent intent = new Intent(this, TestThreadActivity2.class);
-//            startActivity(intent);
 
+        addMyView();
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void addMyView() {
+        button = new Button(this);
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_MOVE:
+                        layoutParams.x = (int) event.getRawX() - button.getWidth() / 2;
+                        layoutParams.y = (int) event.getRawY() - button.getHeight() / 2;
+                        getWindowManager().updateViewLayout(button, layoutParams);
+                        break;
+                }
+
+                return false;
+            }
+        });
+        button.setText("one");
+        layoutParams = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.TYPE_APPLICATION,
+                0, PixelFormat.TRANSPARENT);
+// TODO: 19/1/4 理解flag含义  给View设置这样的布局参数会影响整个WIndow的行为吗？
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
+        layoutParams.gravity = Gravity.START | Gravity.TOP;
+        layoutParams.x = 200;
+        layoutParams.y = 300;
+        getWindowManager().addView(button, layoutParams);
 
     }
 
 
 
     /*
-    * 从桌面启动应用流程
-    * 桌面Launcher也是一个应用程序,当点击图表就会调用startActivity
-    * 此时intent会添加flag为new task 表示在新的栈中打开
-    * 在activity中startActivity都会调用startActivityForResult(intent,int requestCode)
-    * 如果requestCode=-1表示不需返回值
-    *这个方法调用Instrumentation.execStartActivity
-    */
+     * 从桌面启动应用流程
+     * 桌面Launcher也是一个应用程序,当点击图表就会调用startActivity
+     * 此时intent会添加flag为new task 表示在新的栈中打开
+     * 在activity中startActivity都会调用startActivityForResult(intent,int requestCode)
+     * 如果requestCode=-1表示不需返回值
+     *这个方法调用Instrumentation.execStartActivity
+     */
 
     /*
     *Instrumentation 仪表,在attach()中,在Activity的OnCreate()之前完成初始化,用来监视应用程序和系统的交互
@@ -112,36 +147,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     */
 
     /*
-    *
-    *   ActivityInfo aInfo;
-    *   try {
-    *   ResolveInfo rInfo =  AppGlobals.getPackageManager().resolveIntent(intent, resolvedType,PackageManager.MATCH_DEFAULT_ONLY   ActivityManagerService.STOCK_PM_FLAGS);
-    *   aInfo = rInfo != null ? rInfo.activityInfo : null;
-    *   }catch (RemoteException e) {
-    *   ......
-    *   }
-    *
-    * 接下去就调用startActivityLocked 方法进一步处理,
-    *
-    *
-    *
-    *
-    *
-    *
-    *
+     *
+     *   ActivityInfo aInfo;
+     *   try {
+     *   ResolveInfo rInfo =  AppGlobals.getPackageManager().resolveIntent(intent, resolvedType,PackageManager.MATCH_DEFAULT_ONLY   ActivityManagerService.STOCK_PM_FLAGS);
+     *   aInfo = rInfo != null ? rInfo.activityInfo : null;
+     *   }catch (RemoteException e) {
+     *   ......
+     *   }
+     *
+     * 接下去就调用startActivityLocked 方法进一步处理,
+     *
+     *
+     *
+     *
+     *
+     *
+     *
 
-    *
-    * */
+     *
+     * */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_thread_handler:
-//                startActivity(new Intent(this, ThreadHandlerActivity.class));
-                startActivity(new Intent(this, MessengerActivity.class));
-                break;
-            case R.id.btn_thread:
-                startActivity(new Intent(this, SimpleThreadActivity.class));
-                break;
+
             case R.id.btn_simple_service:
                 startActivity(new Intent(this, StartServiceActivity.class));
                 break;
@@ -149,9 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, LocalActivity.class));
                 break;
             case R.id.btn_messenger_service:
-
-//                startActivity(new Intent(this, MessengerActivity.class));
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MessengerActivity.class));
                 /*Intent view = new Intent("android.intent.action.test");
                 view.setClassName("wuhu.anhui.myapplication","wuhu.anhui.myapplication.TestActivity");
                 startActivity(view);*/
@@ -161,20 +188,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: ");
-        
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-//        printStack();
-
-    }
 
     private void printStack() {
 
@@ -192,25 +205,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
-    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

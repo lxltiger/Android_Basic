@@ -35,7 +35,8 @@ public class BasicThread {
 
     public static void main(String[] args) throws InterruptedException {
         BasicThread basicThread = new BasicThread();
-        basicThread.interruptWait();
+//        basicThread.interruptWait();
+        basicThread.stopThread();
     }
 
     /*
@@ -148,26 +149,41 @@ public class BasicThread {
         System.out.println("finish all");
     }
 
-    /*
-     *
-     * 线程的working memory只是cpu的寄存器和高速缓存的抽象描述
-     * 使用volatile修饰的变量不会缓冲在寄存器或其他处理器的缓存中，
-     * 所以一个线程对其的写操作，会刷新到主存，其他读线程读取这个变量总会从主存更新
-     * 但不能mutual exclude （互斥）
-     */
-    private volatile boolean stopRequested;
 
     private void stopThread() throws InterruptedException {
-        Thread backgroundThread = new Thread(() -> {
+
+        StopThread stopThread = new StopThread();
+        stopThread.start();
+        TimeUnit.SECONDS.sleep(3);
+        stopThread.cancle();
+    }
+
+    class StopThread extends Thread {
+        /*
+         * volatile 防止编译器优化重排序
+         * 线程的working memory只是cpu的寄存器和高速缓存的抽象描述
+         * 使用volatile修饰的变量不会缓冲在寄存器或其他处理器的缓存中，
+         * 所以一个线程对其的写操作，会刷新到主存，其他读线程读取这个变量总会从主存更新
+         * 但不能mutual exclude （互斥）
+         */
+        private volatile boolean stop = false;
+
+        @Override
+        public void run() {
             int i = 0;
-            while (!stopRequested)
+//            无意义的循环会被优化
+            while (!stop) {
                 i++;
-        });
-        backgroundThread.start();
-        TimeUnit.SECONDS.sleep(1);
-        //如果stopRequested不是volatile修饰，
-        // 在主线程修改stopRequested的值，backgroundThread不一定看到，可能仍然为false 导致循环不会终止
-        stopRequested = true;
+            }
+            System.out.println(Thread.currentThread().getName() + "finsh r");
+
+        }
+
+        //此处停止不了的原因是编译器的优化，不是可见性导致的
+        public void cancle() {
+            System.out.println(Thread.currentThread().getName());
+            stop = true;
+        }
     }
 
 
