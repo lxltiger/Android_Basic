@@ -173,6 +173,8 @@ public class Client {
         max.ifPresent(value -> {
             System.out.println("max" + value);
         });
+
+
     }
 
     /**

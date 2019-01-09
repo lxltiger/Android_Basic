@@ -42,43 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_bound_service).setOnClickListener(this);
         findViewById(R.id.btn_messenger_service).setOnClickListener(this);
 
-        addMyView();
-
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    public void addMyView() {
-        button = new Button(this);
-        button.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_MOVE:
-                        layoutParams.x = (int) event.getRawX() - button.getWidth() / 2;
-                        layoutParams.y = (int) event.getRawY() - button.getHeight() / 2;
-                        getWindowManager().updateViewLayout(button, layoutParams);
-                        break;
-                }
 
-                return false;
-            }
-        });
-        button.setText("one");
-        layoutParams = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION,
-                0, PixelFormat.TRANSPARENT);
-// TODO: 19/1/4 理解flag含义  给View设置这样的布局参数会影响整个WIndow的行为吗？
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
-        layoutParams.gravity = Gravity.START | Gravity.TOP;
-        layoutParams.x = 200;
-        layoutParams.y = 300;
-        getWindowManager().addView(button, layoutParams);
-
-    }
 
 
 
