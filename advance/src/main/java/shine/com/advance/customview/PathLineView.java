@@ -1,4 +1,4 @@
-package com.example.lxl.myapplication.customview;
+package shine.com.advance.customview;
 
 import android.content.Context;
 import android.graphics.Bitmap;

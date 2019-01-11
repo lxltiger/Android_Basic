@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -61,6 +63,7 @@ public class XfermodeView extends View {
         src = BitmapFactory.decodeResource(getResources(), R.drawable.beauty_mask);
         width = src.getWidth();
         height = src.getHeight();
+
     }
 
     @Override
@@ -73,6 +76,7 @@ public class XfermodeView extends View {
         super.onDraw(canvas);
         //如果不绘制背景会呈黑色
         canvas.drawColor(Color.WHITE);
+
         int saveLayer = canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
 //        先绘制的是目标des
         if (PorterDuff.Mode.DST_IN==mode) {

@@ -14,4 +14,8 @@
             <enum name="DesOut" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="WaveView">
+        <attr name="wave_color" format="color"/>
+    </declare-styleable>
 </resources>

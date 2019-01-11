@@ -12,11 +12,46 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:padding="8dp"
+        android:visibility="gone"
         app:circle_color="@android:color/holo_green_dark"
         app:color_filter="PorterDuffColorFilter" />
 
     <shine.com.advance.customview.XfermodeView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:xfermode="DesOut" />
+        android:visibility="gone"
+        app:xfermode="DesIn" />
+
+    <shine.com.advance.customview.EraseView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <shine.com.advance.customview.FontView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <shine.com.advance.customview.BrickView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <shine.com.advance.customview.LinearGradientView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <shine.com.advance.customview.WaveView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:wave_color="#FFA2D6AE" />
+
+    <shine.com.advance.customview.PathLineView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+
 </LinearLayout>
