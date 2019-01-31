@@ -111,9 +111,9 @@ public class CircleView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        String wm = MeasureSpec.toString(widthMeasureSpec);
-//        String hm = MeasureSpec.toString(heightMeasureSpec);
-//        Log.d(TAG, hm+" onMeasure: " + wm);
+        String wm = MeasureSpec.toString(widthMeasureSpec);
+        String hm = MeasureSpec.toString(heightMeasureSpec);
+        Log.d(TAG, hm+" onMeasure: " + wm);
         int w_mode = MeasureSpec.getMode(widthMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int h_mode = MeasureSpec.getMode(heightMeasureSpec);

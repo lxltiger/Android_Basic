@@ -2,15 +2,20 @@ package shine.com.advance;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import shine.com.advance.customview.MarqueeView;
+
+import static android.view.Window.ID_ANDROID_CONTENT;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,10 +28,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         velocityTracker = VelocityTracker.obtain();
-        marqueeView = (MarqueeView) findViewById(R.id.btn);
-
-
     }
 
     private void print() {
@@ -75,7 +78,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void test(View view) {
-        marqueeView.setText("sdodgiodshgodghidghogdsssds华盛顿送的活动送花送活动山东省的欢送会都是动画还送红色的红红的送电话送货电话8888888dsd");
 
     }
 }

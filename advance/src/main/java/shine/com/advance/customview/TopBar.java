@@ -1,4 +1,4 @@
-package com.example.lxl.myapplication.customview;
+package shine.com.advance.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,10 +8,11 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.lxl.myapplication.R;
+import shine.com.advance.R;
+
 
 /**
- * Created by Administrator on 2015/6/22.
+ * 自定义的标题栏 左右各一个按钮 中间是标题文字
  */
 public class TopBar extends RelativeLayout{
 

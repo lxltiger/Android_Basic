@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:padding="8dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:circle_color="@android:color/holo_green_dark"
         app:color_filter="PorterDuffColorFilter" />
 
@@ -54,14 +54,33 @@
         android:visibility="gone" />
 
     <shine.com.advance.customview.MarqueeView
-        android:id="@+id/btn"
+        android:id="@+id/marquee"
+        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
+
+    <shine.com.advance.customview.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        app:leftBackground="@drawable/ic_action_previous_item"
+        app:rightBackground="@drawable/ic_action_accept"
+        app:titleColor="@android:color/white"
+        app:titleSize="18sp"
+        app:titleText="topbar" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="test"
-        android:text="test"/>
+        android:text="test"
+        android:visibility="gone" />
+
+
+    <shine.com.advance.customview.MatrixView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/a"
+        android:scaleType="matrix" />
 </LinearLayout>

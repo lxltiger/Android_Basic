@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lxl.myapplication.R;
-import com.example.lxl.myapplication.customview.TurnPageView;
 
 import java.util.ArrayList;
 import java.util.List;

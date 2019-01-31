@@ -1,4 +1,4 @@
-package com.example.lxl.myapplication.customview;
+package shine.com.advance.customview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -13,8 +13,9 @@ import android.view.View;
 /**
  * Created by Administrator on 2015/6/27.
  * 自定义多圈图
+ * 使用到了层和基本绘制技巧
  */
-public class MutilpCircleView extends View {
+public class CanvasView extends View {
     // 描边宽度占比
     private static final float STROKE_WIDTH = 1F / 256F,
             CRICLE_LARGER_RADIU = 3F / 32F, // 大圆半径
@@ -32,11 +33,11 @@ public class MutilpCircleView extends View {
     private Paint mPaint;
     private TextPaint textPaint;
     private Paint arcPaint;
-    public MutilpCircleView(Context context) {
+    public CanvasView(Context context) {
         this(context, null);
     }
 
-    public MutilpCircleView(Context context, AttributeSet attrs) {
+    public CanvasView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initPaint();
     }

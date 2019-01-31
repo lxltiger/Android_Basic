@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lxl.myapplication.R;
-import com.example.lxl.myapplication.customview.FlowLayout;
 
 /**
  * A simple {@link Fragment} subclass.
