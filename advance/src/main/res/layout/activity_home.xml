@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomeActivity">
+    tools:context=".acivity.HomeActivity">
 
     <shine.com.advance.customview.CircleView
         android:layout_width="match_parent"
@@ -55,9 +55,9 @@
 
     <shine.com.advance.customview.MarqueeView
         android:id="@+id/marquee"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <shine.com.advance.customview.TopBar
         android:id="@+id/topbar"
@@ -78,9 +78,21 @@
         android:visibility="gone" />
 
 
-    <shine.com.advance.customview.MatrixView
+    <shine.com.advance.customview.CompoundView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:visibility="gone"
+        app:exampleColor="#33b5e5"
+        app:exampleDimension="24sp"
+        app:exampleString="Hello, CompoundView"
+        app:image="@drawable/ic_launcher"
+        app:imageScaleType="center" />
+
+    <shine.com.advance.customview.SortView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/a"
-        android:scaleType="matrix" />
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"/>
 </LinearLayout>

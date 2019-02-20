@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include ':Basic_Java' ,':advance', /*':concurrency'*//*':basicAndroid',*/':customView'
+include ':Basic_Java' ,':advance' /*':concurrency'*//*':basicAndroid',*/

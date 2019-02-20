@@ -25,7 +25,17 @@
         <attr name="titleColor" format="color" />
         <attr name="leftBackground" format="reference" />
         <attr name="rightBackground" format="reference" />
+    </declare-styleable>
 
-
+    <declare-styleable name="CompoundView">
+        <attr name="exampleString" format="string" />
+        <attr name="exampleDimension" format="dimension" />
+        <attr name="exampleColor" format="color" />
+        <attr name="exampleDrawable" format="color|reference" />
+        <attr name="image" format="reference" />
+        <attr name="imageScaleType"  >
+            <enum name="fitXY" value="0"/>
+            <enum name="center" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>
