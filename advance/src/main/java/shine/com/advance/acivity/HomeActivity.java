@@ -9,6 +9,7 @@ import android.view.View;
 
 import shine.com.advance.R;
 import shine.com.advance.customview.MarqueeView;
+import shine.com.advance.customview.SortView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,7 +22,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         velocityTracker = VelocityTracker.obtain();
     }
 
@@ -71,6 +71,5 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void test(View view) {
-
     }
 }

@@ -13,10 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".acivity.MainActivity">
-
-        </activity>
-        <activity android:name=".messenger.MessengerActivity"></activity>
+        <activity android:name=".acivity.MainActivity"></activity>
+        <activity android:name=".messenger.MessengerActivity" />
         <activity android:name=".service.StartServiceActivity" />
         <activity android:name=".service.LocalActivity" />
 
@@ -35,7 +33,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".aidl.FactoryActivity"></activity>
+        <activity android:name=".aidl.FactoryActivity" />
 
         <service
             android:name=".aidl.FactoryService"
@@ -44,12 +42,13 @@
             android:process=":remote" />
         <service android:name=".service.LocalService" />
 
-        <activity android:name=".aidl.RemoteActivity"></activity>
+        <activity android:name=".aidl.RemoteActivity" />
         <activity android:name=".acivity.HomeActivity">
 
+        </activity>
+        <activity android:name=".acivity.SortActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
