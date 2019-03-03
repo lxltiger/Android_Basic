@@ -43,8 +43,8 @@ import static shine.com.advance.GLUtils.createProgram;
 import static shine.com.advance.GLUtils.loadShaderResource;
 
 
-public class AnimationActivity extends AppCompatActivity {
-    private static final String TAG = "AnimationActivity";
+public class OpenGLActivity extends AppCompatActivity {
+    private static final String TAG = "OpenGLActivity";
     private GLSurfaceView mGlSurfaceView;
 
     @Override

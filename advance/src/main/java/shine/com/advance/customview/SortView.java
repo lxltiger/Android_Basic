@@ -1,5 +1,10 @@
 package shine.com.advance.customview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.Keyframe;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,12 +12,14 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,26 +33,21 @@ import shine.com.advance.algor.BubbleSort;
  */
 public class SortView extends View {
     private static final String TAG = "SortView";
+    private static final int DURATION = 3000;
 
     private Paint paint;
     private float interval;
-    private int STAGE_ONE = 1000;
-    private int STAGE_TWO = 2000;
-    private int STAGE_THREE = 3000;
-    private long times;
-    private AnimationListener animationListener;
 
     int width;
     int height;
     List<RectF> rects = new ArrayList<>(20);
     private Random random = new Random();
-    long last = 0;
     private int[] numbers;
     private Queue<Point> command;
-    private Point pair;
-    private boolean start;
     private TextPaint textPaint;
 
+    private ScheduleHandler handler;
+    private TextHolder textHolder;
 
     public SortView(Context context) {
         super(context);
@@ -60,6 +62,22 @@ public class SortView extends View {
     public SortView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        handler = new ScheduleHandler(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (handler != null) {
+            handler.getLooper().quit();
+            handler=null;
+
+        }
     }
 
     private void init(AttributeSet attrs, int defStyle) {
@@ -77,27 +95,117 @@ public class SortView extends View {
         }
 
         command = BubbleSort.formSortCommand(numbers);
-
-
+        textHolder = TextHolder.of();
     }
 
-    public void setAnimationListener(AnimationListener animationListener) {
-        this.animationListener = animationListener;
-    }
+    private static class ScheduleHandler extends Handler {
+        private static final int UPDATE = 1;
+        private WeakReference<SortView> reference;
 
+        private ScheduleHandler(SortView sortView) {
+            this.reference = new WeakReference<>(sortView);
 
-    public void start() {
-        start = true;
-        times = AnimationUtils.currentAnimationTimeMillis();
-        last = AnimationUtils.currentAnimationTimeMillis();
-        pair = command.poll();
-        if (pair != null) {
-            invalidate();
-        } else {
-            start = false;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            SortView sortView = reference.get();
+            if (sortView == null) {
+                return;
+            }
+            switch (msg.what) {
+                case UPDATE:
+                    sortView.fire();
+                    break;
+            }
         }
     }
 
+
+
+    public void fire() {
+        final Point point = command.poll();
+        if (point != null) {
+            final int pos_first = point.x;
+            final int pos_second = point.y;
+            float startX = pos_first * interval + getPaddingLeft() + 12;
+            float stopX = pos_second * interval + getPaddingLeft() + 12;
+
+            if (numbers[pos_first] > numbers[pos_second]) {
+                String text = String.format(Locale.CHINA, "%d交换%d", numbers[pos_first], numbers[pos_second]);
+                textHolder.update((int)startX,(int)stopX,text);
+                update(pos_first, pos_second);
+            } else {
+                String text = String.format(Locale.CHINA, "%d小于%d不需交换", numbers[pos_first], numbers[pos_second]);
+                textHolder.update((int)startX,(int)stopX,text);
+                invalidate();
+                handler.sendEmptyMessageDelayed(ScheduleHandler.UPDATE, 1500);
+            }
+        }else{
+            textHolder.update(0, 0, "");
+            invalidate();
+        }
+    }
+
+    private void update(int pos_first, int pos_second) {
+        float distance = (pos_second - pos_first) * interval;
+        RectF first = rects.get(pos_first);
+        RectF second = rects.get(pos_second);
+        Keyframe keyframe1 = Keyframe.ofFloat(0, first.left);
+        Keyframe keyframe3 = Keyframe.ofFloat(0.3f, first.left + distance / 2);
+
+        Keyframe keyframe2 = Keyframe.ofFloat(0, first.bottom);
+        Keyframe keyframe4 = Keyframe.ofFloat(0.3f, first.bottom + 200);
+
+        Keyframe keyframe5 = Keyframe.ofFloat(0.4f, second.left);
+        Keyframe keyframe6 = Keyframe.ofFloat(0.6f, second.left - distance);
+
+        Keyframe keyframe7 = Keyframe.ofFloat(0.7f, first.left + distance / 2);
+        Keyframe keyframe9 = Keyframe.ofFloat(1, first.left + distance);
+
+        Keyframe keyframe8 = Keyframe.ofFloat(0.7f, first.bottom + 200);
+        Keyframe keyframe10 = Keyframe.ofFloat(1f, 200);
+
+
+        PropertyValuesHolder holder1 = PropertyValuesHolder.ofKeyframe("x", keyframe1, keyframe3, keyframe7, keyframe9);
+        PropertyValuesHolder holder2 = PropertyValuesHolder.ofKeyframe("y", keyframe2, keyframe4, keyframe8, keyframe10);
+        PropertyValuesHolder holder3 = PropertyValuesHolder.ofKeyframe("second", keyframe5, keyframe6);
+        ValueAnimator valueAnimator = ValueAnimator.ofPropertyValuesHolder(holder1, holder2, holder3).setDuration(DURATION);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+
+                float x = (float) animation.getAnimatedValue("x");
+                float y = (float) animation.getAnimatedValue("y");
+
+                first.left = x;
+                first.right = x + 24;
+                first.bottom = y;
+                first.top = y - numbers[pos_first];
+
+                float secondx = (float) animation.getAnimatedValue("second");
+                second.left = secondx;
+                second.right = secondx + 24;
+
+                invalidate();
+            }
+        });
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                swap(numbers, pos_first, pos_second);
+                Collections.swap(rects, pos_first, pos_second);
+                handler.sendEmptyMessageDelayed(ScheduleHandler.UPDATE, 500);
+//                fire();
+
+            }
+        });
+
+        valueAnimator.start();
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -122,61 +230,17 @@ public class SortView extends View {
             float right = left + 24;
             RectF rect = new RectF(left, top, right, bottom);
             rects.add(rect);
-//            Log.d(TAG, "onSizeChanged: " + rect.toString());
         }
     }
 
-    private String text = "";
 
-    private void update() {
-        int first = pair.x;
-        int second = pair.y;
-
-
-        long current = AnimationUtils.currentAnimationTimeMillis();
-        long stage = current - times;
-        long draw_time_consume = current - last;
-        last = current;
-        int margin = second - first;
-        float dx = (draw_time_consume * interval * margin) / STAGE_ONE;
-        float dy = (draw_time_consume * 200f / STAGE_ONE);
-
-        if (numbers[first] < numbers[second]) {
-            if (stage < 1000) {
-                text = String.format(Locale.CHINA, "%d 小于 %d 不需交换", numbers[first], numbers[second]);
-                invalidate();
-            } else {
-                start();
-            }
-        } else {
-            text = String.format(Locale.CHINA, "%d 交换 %d", numbers[first], numbers[second]);
-            if (stage <= STAGE_ONE) {
-                RectF point = rects.get(first);
-                point.offset(dx / 2, dy);
-                invalidate();
-            } else if (stage <= STAGE_TWO) {
-                RectF point = rects.get(second);
-                point.offset(-dx, 0);
-                invalidate();
-            } else if (stage < STAGE_THREE) {
-                RectF point = rects.get(first);
-                point.offset(dx / 2, -dy);
-                invalidate();
-            } else {
-                Collections.swap(rects, first, second);
-                swap(numbers, first, second);
-                start();
-            }
-        }
-
-
-    }
 
     private void swap(int[] numbers, int i, int j) {
         int temp = numbers[i];
         numbers[i] = numbers[j];
         numbers[j] = temp;
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -186,24 +250,33 @@ public class SortView extends View {
             canvas.drawRect(rect, paint);
         }
 
+        canvas.drawLine(textHolder.startX, 200, textHolder.startX, 220, paint);
+        canvas.drawLine(textHolder.startX, 220, textHolder.stopX, 220, paint);
+        canvas.drawLine(textHolder.stopX, 200, textHolder.stopX, 220, paint);
+        canvas.drawText(textHolder.text, (textHolder.startX + textHolder.stopX) / 2, 250, textPaint);
 
-        if (start) {
-            float startX=pair.x*interval+getPaddingLeft()+12;
-            float stopx=pair.y*interval+getPaddingLeft()+12;
-            canvas.drawLine(startX, 200, startX, 220, paint);
-            canvas.drawLine(startX,220,stopx,220,paint);
-            canvas.drawLine(stopx,200,stopx,220,paint);
-            canvas.drawText(text, (startX+stopx)/2, 225, textPaint);
+    }
 
-            update();
+
+    private static class TextHolder {
+        private int startX;
+        private int stopX;
+        private String text;
+
+        public TextHolder(int startX, int stopX, String text) {
+            this.startX = startX;
+            this.stopX = stopX;
+            this.text = text;
         }
 
+        public static TextHolder of() {
+            return new TextHolder(0, 0, "");
+        }
 
+        public void update(int startX, int startY, String text) {
+            this.startX = startX;
+            this.stopX = startY;
+            this.text = text;
+        }
     }
-
-    public interface AnimationListener {
-        void onAnimationEnd();
-    }
-
-
 }

@@ -28,6 +28,8 @@ public class SortActivity extends AppCompatActivity {
     }
 
     public void test(View view) {
-        sortView.start();
+
+
+        sortView.fire();
     }
 }
