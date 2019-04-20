@@ -9,7 +9,6 @@ import android.view.View;
 
 import shine.com.advance.R;
 import shine.com.advance.customview.MarqueeView;
-import shine.com.advance.customview.SortView;
 
 public class HomeActivity extends AppCompatActivity {
 

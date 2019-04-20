@@ -1,9 +1,9 @@
-package com.lxl.foundation.entity;
+package com.lxl.advance.entity;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
-import com.lxl.foundation.BR;
+import com.lxl.advance.BR;
 
 
 /**

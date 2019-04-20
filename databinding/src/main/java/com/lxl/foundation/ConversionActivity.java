@@ -1,4 +1,4 @@
-package com.lxl.foundation;
+package com.lxl.advance;
 
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.lxl.foundation.databinding.ActivityConversionBinding;
+import com.lxl.advance.databinding.ActivityConversionBinding;
 
 /**
  * 转换邦定

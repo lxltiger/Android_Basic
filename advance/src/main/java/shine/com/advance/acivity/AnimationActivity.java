@@ -1,4 +1,4 @@
-package shine.com.advance.anim;
+package shine.com.advance.acivity;
 
 import android.animation.ValueAnimator;
 import android.support.v7.app.AppCompatActivity;

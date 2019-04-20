@@ -1,9 +1,9 @@
-package com.lxl.foundation;
+package com.lxl.advance;
 
 import android.view.View;
 import android.widget.Toast;
 
-import com.lxl.foundation.entity.User;
+import com.lxl.advance.entity.User;
 
 /**
  * author:

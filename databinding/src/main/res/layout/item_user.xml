@@ -3,7 +3,7 @@
     <data>
         <variable
             name="user"
-            type="com.lxl.foundation.entity.User"/>
+            type="com.lxl.advance.entity.User"/>
     </data>
     <LinearLayout
         android:orientation="horizontal"

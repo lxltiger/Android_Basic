@@ -1,4 +1,4 @@
-package com.lxl.foundation;
+package com.lxl.advance;
 
 import java.util.Random;
 

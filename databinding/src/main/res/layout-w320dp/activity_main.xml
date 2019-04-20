@@ -7,7 +7,7 @@
 
         <variable
             name="handler"
-            type="com.lxl.foundation.HomeClickHandler" />
+            type="com.lxl.advance.HomeClickHandler" />
     </data>
 
     <LinearLayout

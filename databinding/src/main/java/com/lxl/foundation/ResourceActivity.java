@@ -1,10 +1,10 @@
-package com.lxl.foundation;
+package com.lxl.advance;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.lxl.foundation.databinding.ActivityResourceBinding;
+import com.lxl.advance.databinding.ActivityResourceBinding;
 
 /**
  * 资源在View中的邦定

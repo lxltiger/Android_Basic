@@ -3,10 +3,10 @@
     <data>
         <variable
             name="user"
-            type="com.lxl.foundation.entity.User"/>
+            type="com.lxl.advance.entity.User"/>
         <variable
             name="handler"
-            type="com.lxl.foundation.UserClickHandler"/>
+            type="com.lxl.advance.UserClickHandler"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"

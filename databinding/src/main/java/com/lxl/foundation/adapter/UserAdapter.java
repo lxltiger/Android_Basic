@@ -1,4 +1,4 @@
-package com.lxl.foundation.adapter;
+package com.lxl.advance.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lxl.foundation.R;
-import com.lxl.foundation.Utils;
-import com.lxl.foundation.databinding.ItemUserBinding;
-import com.lxl.foundation.entity.User;
+import com.lxl.advance.R;
+import com.lxl.advance.Utils;
+import com.lxl.advance.databinding.ItemUserBinding;
+import com.lxl.advance.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;

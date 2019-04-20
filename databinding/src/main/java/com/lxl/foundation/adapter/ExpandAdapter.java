@@ -1,4 +1,4 @@
-package com.lxl.foundation.adapter;
+package com.lxl.advance.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.lxl.foundation.R;
+import com.lxl.advance.R;
 
 import java.util.HashMap;
 import java.util.List;

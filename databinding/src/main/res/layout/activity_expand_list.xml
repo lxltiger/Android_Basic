@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lxl.foundation.entity.ExpandListActivity">
+    tools:context="com.lxl.advance.entity.ExpandListActivity">
 
     <ExpandableListView
         android:id="@+id/expandListView"

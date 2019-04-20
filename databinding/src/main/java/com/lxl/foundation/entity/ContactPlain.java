@@ -1,4 +1,4 @@
-package com.lxl.foundation.entity;
+package com.lxl.advance.entity;
 
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;

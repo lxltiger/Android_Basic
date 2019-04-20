@@ -1,4 +1,4 @@
-package com.lxl.foundation;
+package com.lxl.advance;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.lxl.foundation.adapter.UserAdapter;
-import com.lxl.foundation.databinding.ActivityDynamicBinding;
+import com.lxl.advance.adapter.UserAdapter;
+import com.lxl.advance.databinding.ActivityDynamicBinding;
 
 /**
  * ViewBinding在RecycleView adapter中的应用

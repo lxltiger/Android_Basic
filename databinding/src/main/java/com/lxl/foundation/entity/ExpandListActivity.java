@@ -1,4 +1,4 @@
-package com.lxl.foundation.entity;
+package com.lxl.advance.entity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 
-import com.lxl.foundation.R;
-import com.lxl.foundation.adapter.ExpandAdapter;
+import com.lxl.advance.R;
+import com.lxl.advance.adapter.ExpandAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

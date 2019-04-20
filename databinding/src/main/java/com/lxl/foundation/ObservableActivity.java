@@ -1,4 +1,4 @@
-package com.lxl.foundation;
+package com.lxl.advance;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayMap;
@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.lxl.foundation.databinding.ActivityObservableBinding;
-import com.lxl.foundation.entity.ContactObservable;
-import com.lxl.foundation.entity.ContactPlain;
+import com.lxl.advance.databinding.ActivityObservableBinding;
+import com.lxl.advance.entity.ContactObservable;
+import com.lxl.advance.entity.ContactPlain;
 
 /**
  * 演示View和Model的邦定

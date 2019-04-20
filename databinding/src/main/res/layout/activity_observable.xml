@@ -5,11 +5,11 @@
 
         <variable
             name="contact"
-            type="com.lxl.foundation.entity.ContactObservable"/>
+            type="com.lxl.advance.entity.ContactObservable"/>
 
         <variable
             name="contactWithAge"
-            type="com.lxl.foundation.entity.ContactPlain"/>
+            type="com.lxl.advance.entity.ContactPlain"/>
         <!--红色警示不影响编译，< 括号一定要用&lt;代替 其是解析xml的关键符-->
         <variable
             name="contactMap"

@@ -1,4 +1,4 @@
-package com.lxl.foundation.entity;
+package com.lxl.advance.entity;
 
 /**
  * Created by Administrator on 2015/12/6.

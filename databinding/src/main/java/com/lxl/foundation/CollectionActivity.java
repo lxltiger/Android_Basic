@@ -1,11 +1,11 @@
-package com.lxl.foundation;
+package com.lxl.advance;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 
-import com.lxl.foundation.databinding.ActivityCollectionBinding;
+import com.lxl.advance.databinding.ActivityCollectionBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
