@@ -17,11 +17,7 @@ basicrxjava
 currency 
 - 来自并发实战的实例
 
-customView 
-- 自定义控件演示
 
-databinding  
-- 数据绑定的演示
 
 netty Netty
 - 简单实例和Java NIO 基础
@@ -35,5 +31,3 @@ cross_walk
 
 ````
 
-arch
-- android Architecture components 基础
