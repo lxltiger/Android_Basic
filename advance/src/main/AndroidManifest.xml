@@ -13,16 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".acivity.MainActivity" />
         <activity android:name=".messenger.MessengerActivity" />
         <activity android:name=".service.StartServiceActivity" />
         <activity android:name=".service.LocalActivity" />
 
-        <service
-            android:name=".aidl.RemoteService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote" />
+
         <service
             android:name=".messenger.MessengerService"
             android:enabled="true"
@@ -33,21 +28,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".aidl.FactoryActivity" />
 
-        <service
-            android:name=".aidl.FactoryService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":remote" />
+
         <service android:name=".service.LocalService" />
 
-        <activity android:name=".aidl.RemoteActivity" />
         <activity android:name=".acivity.HomeActivity"></activity>
-        <activity android:name=".acivity.AnimationActivity">
-
-
-        </activity>
     </application>
 
 </manifest>
