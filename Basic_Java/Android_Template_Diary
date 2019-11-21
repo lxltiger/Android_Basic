@@ -1,0 +1,38 @@
+#Android工程模块自定义
+需要修改的工程目录：C:\Program Files\Android\Android Studio\plugins\android\lib\templates
+复制依赖文件version.gradle到此目录下以备后用
+
+##修改新建工程文件
+路径：C:\Program Files\Android\Android Studio\plugins\android\lib\templates\gradle-projects\NewAndroidProject
+因当前目录下文件不可修改，需要复制到其他目录修改后再覆盖原来的文件
+
+###修改recipe.xml.ftl
+```
+目的：将template/version.gradle复制到项目根目录下
+
+ <copy from="../../versions.gradle"
+       to="${escapeXmlAttribute(topOut)}/versions.gradle" />   
+```
+
+###修改build.gradle.ftl
+```
+buildscript {<#if includeKotlinSupport!false>
+    ext.kotlin_version = '${kotlinVersion}'</#if>
+    <@loadProperties/>
+    //使用下面内容替换以前的
+    apply from: 'versions.gradle'
+    addRepos(repositories)
+    dependencies {
+        <#if includeKotlinSupport!false>classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"</#if>
+        //注意 难点：ftl使用$取变量值，如果我们的语句也要使用$取变量，使用这样的语句${r'variable'}包裹变量否则生成代码时解析失败
+        classpath "com.android.tools.build:gradle:${r'${versions.android_gradle_plugin}'}"
+    }
+}
+
+allprojects {
+     //使用下面内容替换以前的
+    addRepos(repositories)
+}
+```
+
+module的build.gradle 修改失败 不起作用
