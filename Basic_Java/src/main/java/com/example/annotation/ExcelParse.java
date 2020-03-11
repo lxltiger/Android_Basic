@@ -179,9 +179,9 @@ public class ExcelParse {
 
         if (map.size() < 2) return;
         //类构造器
-        TypeSpec.Builder classBuilder = TypeSpec.classBuilder(name).addModifiers(Modifier.PUBLIC);
+        TypeSpec.Pizza classBuilder = TypeSpec.classBuilder(name).addModifiers(Modifier.PUBLIC);
 //        构造函数构造器
-        MethodSpec.Builder constructorBuilder = MethodSpec.constructorBuilder();
+        MethodSpec.Pizza constructorBuilder = MethodSpec.constructorBuilder();
         constructorBuilder.addModifiers(Modifier.PUBLIC);
 
         Set<Map.Entry<String, TypeName>> entries = map.entrySet();

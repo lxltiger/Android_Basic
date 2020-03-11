@@ -265,7 +265,7 @@ public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
 
     private void testCompare() {
         PhoneNumber phoneNumber = new PhoneNumber(1, 2, 3);
-        PhoneNumber phoneNumber2 = new PhoneNumber(2, 2, 3);
+        PhoneNumber phoneNumber2 = new PhoneNumber(1, 2, 3);
         int i = phoneNumber.compareTo(phoneNumber2);
         System.out.println(i);
     }
@@ -294,6 +294,7 @@ public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
         return COMPARATOR.compare(this, phoneNumber);
     }
 
+
     /*
      * Comparator里面竟然有个equals抽象方法，实例化Comparator也不用复写，感觉没有必要
      * 在Java8中，可以如下生成按某种顺序比较的复合比较器。内部实现是从最后一个比较方法进入向前调用的
@@ -305,6 +306,7 @@ public class PhoneNumber implements Cloneable, Comparable<PhoneNumber> {
             comparingInt((ToIntFunction<PhoneNumber>) phoneNumber -> phoneNumber.areaCode)
                     .thenComparingInt(pn -> pn.prefix)
                     .thenComparingInt(pn -> pn.linNum);
+
 
 
     // 使用组合方式，Adds a value component without violating the equals contract
