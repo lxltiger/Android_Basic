@@ -139,11 +139,8 @@ ext.deps = deps
 def build_versions = [:]
 build_versions.min_sdk = 19
 build_versions.target_sdk = 29
-<<<<<<< HEAD
+
 build_versions.build_tools = "29.0.1"
-=======
-build_versions.build_tools = "29.0.3"
->>>>>>> 8092f33a427f8462d6627a40d15727ef4a11efb1
 ext.build_versions = build_versions
 
 def work = [:]

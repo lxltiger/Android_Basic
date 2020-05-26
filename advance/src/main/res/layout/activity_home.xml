@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:onClick="test"
         android:text="test"
-        android:visibility="gone" />
+         />
 
 
     <shine.com.advance.customview.CompoundView

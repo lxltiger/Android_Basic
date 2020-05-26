@@ -15,7 +15,12 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".messenger.MessengerActivity" />
         <activity android:name=".service.StartServiceActivity" />
-        <activity android:name=".service.LocalActivity" />
+        <activity android:name=".service.LocalActivity" android:allowTaskReparenting="true">
+            <intent-filter>
+                <action android:name="android.intent.action.test"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
 
         <service
@@ -32,7 +37,13 @@
 
         <service android:name=".service.LocalService" />
 
-        <activity android:name=".acivity.HomeActivity"></activity>
+        <activity android:name=".acivity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

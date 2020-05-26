@@ -29,29 +29,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: auto-service-1.0-rc3" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: javawriter-2.5.1" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: javapoet-1.11.1" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: retrofit-2.3.0" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: auto-common-0.3" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: guava-19.0" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: okhttp-3.8.0" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: okio-1.13.0" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: auto-service-1.0-rc3" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: javawriter-2.5.1" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: javapoet-1.11.1" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: retrofit-2.3.0" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: auto-common-0.3" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: guava-19.0" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: okhttp-3.8.0" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: okio-1.13.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: auto-service-1.0-rc3" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: javawriter-2.5.1" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: javapoet-1.11.1" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: retrofit-2.3.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: auto-common-0.3" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: guava-19.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: okhttp-3.8.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: okio-1.13.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: auto-service-1.0-rc3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: javawriter-2.5.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: javapoet-1.11.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: retrofit-2.3.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: auto-common-0.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: guava-19.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: okhttp-3.8.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: okio-1.13.0" level="project" />
   </component>
 </module>
